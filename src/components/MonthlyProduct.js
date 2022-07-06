@@ -1,19 +1,36 @@
 import Timer from "./Timer";
 import styled from "styled-components";
+import axios from "axios";
 import { IoTimerOutline,IoHeart } from "react-icons/io5";
+import { useEffect, useState } from "react";
 export default function MonthlyProduct(){
+    const [products,setProducts] = useState([]);
+
+    useEffect(()=>{
+        const promise = axios.get("http://localhost:5000");
+
+        promise.then(res => {
+            console.log(res.data)
+            setProducts(res.data);
+        })
+
+        promise.catch(Error => {
+            alert(Error.response.data)
+        })
+    },[])
+
     return(
-        <>
-        <Container>
+        products.map((product,index) => 
+            <Container key={index}>
             <div>
                 <IoHeart color={'red'} size={20} />
             </div>
             <div>
-                <img src="https://images7.kabum.com.br/produtos/fotos/85197/85197_index_m.jpg" alt="" srcset="" />
+                <img src={product.image} alt="" srcset="" />
                 <div>
-                    <h1>SSD Kingston A400, 240GB, SATA, Leitura 500MB/s, Gravação 350MB/s - SA400S37/240G</h1>
-                    <h2>R$ 352,82</h2>
-                    <h3>R$ 179,90</h3>
+                    <h1>{product.title}</h1>
+                    <h2>R$ {product.preço}</h2>
+                    <h3>R$ {product.preço*0.85}</h3>
                     <h4>À vista no PIX</h4>
                 </div>
             </div>
@@ -25,77 +42,15 @@ export default function MonthlyProduct(){
                 </div>
             </div>
         </Container>
-        <Container>
-            <div>
-                <IoHeart color={'red'} size={20} />
-            </div>
-            <div>
-                <img src="https://images7.kabum.com.br/produtos/fotos/85197/85197_index_m.jpg" alt="" srcset="" />
-                <div>
-                    <h1>SSD Kingston A400, 240GB, SATA, Leitura 500MB/s, Gravação 350MB/s - SA400S37/240G</h1>
-                    <h2>R$ 352,82</h2>
-                    <h3>R$ 179,90</h3>
-                    <h4>À vista no PIX</h4>
-                </div>
-            </div>
-            <div>
-                <IoTimerOutline color={'#ffffff'} />
-                <div>
-                    <h1>Termina em</h1>
-                    <Timer/>
-                </div>
-            </div>
-        </Container>
-        <Container>
-            <div>
-                <IoHeart color={'red'} size={20} />
-            </div>
-            <div>
-                <img src="https://images7.kabum.com.br/produtos/fotos/85197/85197_index_m.jpg" alt="" srcset="" />
-                <div>
-                    <h1>SSD Kingston A400, 240GB, SATA, Leitura 500MB/s, Gravação 350MB/s - SA400S37/240G</h1>
-                    <h2>R$ 352,82</h2>
-                    <h3>R$ 179,90</h3>
-                    <h4>À vista no PIX</h4>
-                </div>
-            </div>
-            <div>
-                <IoTimerOutline color={'#ffffff'} />
-                <div>
-                    <h1>Termina em</h1>
-                    <Timer/>
-                </div>
-            </div>
-        </Container>
-        <Container>
-            <div>
-                <IoHeart color={'red'} size={20} />
-            </div>
-            <div>
-                <img src="https://images7.kabum.com.br/produtos/fotos/85197/85197_index_m.jpg" alt="" srcset="" />
-                <div>
-                    <h1>SSD Kingston A400, 240GB, SATA, Leitura 500MB/s, Gravação 350MB/s - SA400S37/240G</h1>
-                    <h2>R$ 352,82</h2>
-                    <h3>R$ 179,90</h3>
-                    <h4>À vista no PIX</h4>
-                </div>
-            </div>
-            <div>
-                <IoTimerOutline color={'#ffffff'} />
-                <div>
-                    <h1>Termina em</h1>
-                    <Timer/>
-                </div>
-            </div>
-        </Container>
-        </>
+        )
     );
 }
 
 const Container = styled.div`
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
-    width: 300px;
+    min-width: 300px;
     height: 200px;
     background-color: #ffffff;
     margin-right: 10px;
@@ -104,7 +59,6 @@ const Container = styled.div`
     > * {
         &:first-child{
             display: flex;
-            height: 40px;
             justify-content: flex-end;
         }
     }
@@ -114,7 +68,7 @@ const Container = styled.div`
         display: flex;
 
         img{
-            height: 100px;
+            height: 90px;
             width: 120px;
             margin-right: 8px;
         }
@@ -126,7 +80,8 @@ const Container = styled.div`
                     display: inline-block;
                     overflow:hidden;
                     white-space:nowrap;
-                    width: calc(26%);
+                    min-width: 100px;
+                    max-width: calc(26%);
                     text-overflow: ellipsis;
                     margin-bottom: 8px;
                     font-weight: bolder;

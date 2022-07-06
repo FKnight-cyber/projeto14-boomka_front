@@ -5,6 +5,7 @@ import Timer from "../components/Timer";
 import dayjs from "dayjs";
 import MonthlyProduct from "../components/MonthlyProduct";
 import { useState } from "react";
+import {slider} from "../components/slideshow";
 
 export default function Home(){
     const [opened,setOpened] = useState(false);
@@ -62,6 +63,7 @@ export default function Home(){
                 </Menu>
                 :
                 <Section>
+                <Slides>{slider}</Slides>
                 <div>
                     <h1>{dayjs().locale('pt-br').format('MMMM')} GAMER</h1>
                     <div>
@@ -121,6 +123,10 @@ const Header = styled.div`
         width: 70px;
     }
   }
+`
+
+const Slides = styled.div`
+
 `
 
 const Menu = styled.div`
@@ -199,7 +205,7 @@ const Menu = styled.div`
 
 const Section = styled.div`
     > * {
-        &:nth-child(1){
+        &:nth-child(2){
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -212,7 +218,7 @@ const Section = styled.div`
         }
 
         > * {
-        &:nth-child(2){
+        &:nth-child(3){
             display: flex;
             justify-content: center;
             align-items: center;
