@@ -1,63 +1,53 @@
-import styled from "styled-components";
 import Header from "../components/Header";
+import styled from "styled-components";
 import { useState } from "react";
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import UserContext from '../contexts/UserContext.js'
 
-export default function Registration () {
-    
-    return (
-        <>
-        <Header />
-        <Container>
-            <Register />
-        </Container>
-        
-        </>
-    )
-}
-function Register () {
+export default function Login () {
+    const {setUser} = useContext(UserContext)
     const navigate = useNavigate()
-    const [user, setUser] = useState({
+    const [userLogin, setUserLogin] = useState({
         email: '',
-        password: '',
-        checkPassword: '',
-        cpf: ''
+        password: ''
     });
-    function signUp(e) {
+    function signIn(e) {
         e.preventDefault()
-        const promise = axios.post('https://boomka.herokuapp.com/sign-up', {...user});
+        const promise = axios.post('https://back-boomka.herokuapp.com/sign-in', {...userLogin});
         promise
-        .then(() => navigate('/sign-in'))
+        .then((res) => {
+            setUser(res.data);
+            navigate('/')
+        })
         .catch(() => alert('preencha os dados corretamente'))
     }
     function changeInput(e) {
-        setUser({...user, [e.target.name]: e.target.value})
+        setUserLogin({...userLogin, [e.target.name]: e.target.value})
     }
     return (
-        
-            <div>
-                <div className="main">
-                    <h1>FAZER CADASTRO</h1>
+    <>
+            <Header />
+            <Container>
+                <div>
+                    <div className="main">
+                        <h1>FAZER LOGIN</h1>
+                    </div>
+                    <form>
+                        <input value={userLogin.email} name='email' type="email" placeholder="email" onChange={changeInput}/>
+                        <input value={userLogin.password} name='password' type="password" placeholder="senha" onChange={changeInput}/>
+                        <button onClick={signIn} type={'submit'}>
+                            <span>LOGIN</span>
+                        </button>
+                        <span onClick={() => navigate('/sign-up')}>Nao possui conta? cadastre-se</span>
+                    </form>
                 </div>
-                <form>
-                <input value={user.email} name='email' type="email" placeholder="email" onChange={changeInput}/>
-                <input value={user.password} name='password' type="password" placeholder="senha" onChange={changeInput}/>
-                <input value={user.checkPassword} name='checkPassword' type="password" placeholder="confirme sua senha" onChange={changeInput}/>
-                <input value={user.cpf} name='cpf' type="text" placeholder="cpf" onChange={changeInput}/>
-                <button onClick={signUp} type={'submit'}>
-                    <span>CADASTRAR</span>
-                </button>
-                </form> 
                 
-
-                
-            </div>
-            
-       
+            </Container>
+    </>
     )
 }
-
 const Container = styled.div `
     height: 100vh;
     

@@ -58,8 +58,8 @@ export default function Home(){
                         </div>
                     </div>
                     <div>
-                        <button onClick={() => navigate("/login")}>Login</button>
-                        <button>Cadastro</button>
+                        <button onClick={() => navigate("/sign-in")}>Login</button>
+                        <button onClick={() => navigate("/sign-up")}>Cadastro</button>
                     </div>
                 </Menu>
                 :
