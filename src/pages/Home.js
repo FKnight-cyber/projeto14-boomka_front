@@ -5,9 +5,11 @@ import Timer from "../components/Timer";
 import dayjs from "dayjs";
 import MonthlyProduct from "../components/MonthlyProduct";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home(){
     const [opened,setOpened] = useState(false);
+    const navigate = useNavigate();
 
     function toggleMenu(){
         if(opened){
@@ -56,7 +58,7 @@ export default function Home(){
                         </div>
                     </div>
                     <div>
-                        <button>Login</button>
+                        <button onClick={() => navigate("/login")}>Login</button>
                         <button>Cadastro</button>
                     </div>
                 </Menu>
