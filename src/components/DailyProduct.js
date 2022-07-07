@@ -1,15 +1,14 @@
-import Timer from "./Timer";
 import styled from "styled-components";
 import axios from "axios";
-import { IoTimerOutline,IoHeart } from "react-icons/io5";
+import { IoHeart } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function MonthlyProduct(){
+export default function DailyProduct(){
     const [products,setProducts] = useState([]);
 
     useEffect(()=>{
-        const promise = axios.get("http://localhost:5000/monthly");
+        const promise = axios.get("http://localhost:5000/daily");
 
         promise.then(res => {
             setProducts(res.data);
@@ -21,7 +20,7 @@ export default function MonthlyProduct(){
     },[])
 
     return(
-        products.map((product,index) => 
+        products.map((product,index) =>
         <Link to={`produtos/${product.id}`} style={{textDecoration:'none'}} >
             <Container key={index}>
                 <div>
@@ -32,19 +31,12 @@ export default function MonthlyProduct(){
                     <div>
                         <h1>{product.title}</h1>
                         <h2>R$ {product.price}</h2>
-                        <h3>R$ {product.price*0.85}</h3>
+                        <h3>R$ {parseFloat(product.price*0.85).toFixed(2)}</h3>
                         <h4>À vista no PIX</h4>
                     </div>
                 </div>
-                <div>
-                    <IoTimerOutline color={'#ffffff'} />
-                    <div>
-                        <h1>Termina em</h1>
-                        <Timer/>
-                    </div>
-                </div>
             </Container>
-        </Link>
+        </Link> 
         )
     );
 }
@@ -55,7 +47,7 @@ const Container = styled.div`
     flex-direction: column;
     min-width: 300px;
     max-width: 300px;
-    height: 200px;
+    height: 140px;
     background-color: #ffffff;
     margin-right: 10px;
     padding: 8px;
@@ -109,34 +101,4 @@ const Container = styled.div`
         }
     }
   }
-
-  > * {
-        &:nth-child(3){
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #E65F0D;
-
-            > * {
-                &:first-child{
-                    display: flex;
-                    width: 60px;
-                    height: 40px;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #E65F0D;
-                }
-            }
-
-            > * {
-                &:nth-child(2){
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    flex-direction: column;
-                    color: #E65F0D;
-                }
-            }
-        }
-    }
 `

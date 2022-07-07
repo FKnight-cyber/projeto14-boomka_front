@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import Home from "../pages/Home.js";
+import Produto from "../pages/Produto.js";
 import GlobalStyle from "../theme/globalstyles.js";
 import UserContext from "../contexts/UserContext.js";
 
@@ -18,6 +19,7 @@ export default function App() {
     <UserContext.Provider value={userContext}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/produtos/:id" element={<Produto />} />
       </Routes>
     </UserContext.Provider >
     </BrowserRouter> 

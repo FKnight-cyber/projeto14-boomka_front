@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import logo from "../assets/kbum3logo.png";
-import { IoMenuOutline,IoCart,IoSearchOutline,IoTimerOutline,IoClose,IoPerson,IoPeople } from "react-icons/io5";
+import { IoMenuOutline,IoCart,IoSearchOutline,
+IoTimerOutline,IoClose,IoPerson,IoPeople,IoFlash } from "react-icons/io5";
 import Timer from "../components/Timer";
 import dayjs from "dayjs";
 import MonthlyProduct from "../components/MonthlyProduct";
+import DailyProduct from "../components/DailyProduct";
 import { useState } from "react";
 import {slider} from "../components/slideshow";
 
@@ -72,9 +74,16 @@ export default function Home(){
                     </div>
                 </div>
                 <Contents>
-                    <MonthlyProducts>
+                    <Products>
                         <MonthlyProduct></MonthlyProduct>
-                    </MonthlyProducts>
+                    </Products>
+                    <Title>
+                        <IoFlash size={20} color={'#E65F0D'} />
+                        <h1>Acabaram de chegar!</h1>
+                    </Title>
+                    <Products>
+                        <DailyProduct></DailyProduct>
+                    </Products>
                 </Contents>
             </Section>
             }
@@ -215,34 +224,39 @@ const Section = styled.div`
             color:#ffffff;
             padding-left: 20px;
             padding-right: 20px;
-        }
-
-        > * {
-        &:nth-child(3){
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
             > * {
-                &:first-child{
-                    margin-right:6px;
-                    }
+                &:nth-child(2){
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 110px;
                 }
             }
         }
-    }       
+    }
 `
 
 const Contents = styled.div`
     display: flex;
+    flex-direction: column;
     background-color: #FAFAFB;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 260px);
     padding: 20px 16px 20px 16px;
 `
 
-const MonthlyProducts = styled.div`
+const Products = styled.div`
     display: flex;
-    width: 100%;
     overflow-x: scroll;
+    scroll-behavior: auto;
+`
+
+const Title = styled.div`
+    display: flex;
+    font-size: 20px;
+    color: #000000;
+    font-weight: bolder;
+    margin-top: 20px;
+    margin-bottom: 20px;
 `
