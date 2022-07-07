@@ -1,13 +1,16 @@
-import axios from 'axios'
+import axios from 'axios';
 import { IoMenuOutline,IoCart,IoSearchOutline,IoHeart,
 IoCheckmarkCircleSharp,IoSadOutline } from "react-icons/io5";
 import logo from "../../assets/kbum3logo.png";
-import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import { useEffect, useState,useContext } from "react";
+import { useParams,useNavigate, Link } from 'react-router-dom';
 import { Container,Header,Footer,Content } from './Produto.js';
+import UserContext from '../../contexts/UserContext';
 
 export default function Produto(){
     const [produto,setProduto] = useState('');
+    const navigate = useNavigate();
+    const { cart,setCart } = useContext(UserContext);
 
     const {id} = useParams();
 
@@ -15,14 +18,19 @@ export default function Produto(){
         const promise = axios.get(`https://boomka.herokuapp.com/produtos/${id}`);
 
         promise.then(res => {
-            console.log(produto)
             setProduto(res.data);
         })
 
         promise.catch(Error => {
             alert(Error.response.data);
         })
-    },[])
+    },[id])
+
+    function addToCart(produto){
+        if(produto.inventory === 0) return alert('Estoque esgotado!');
+        if(cart.includes(produto)) return;
+        setCart([...cart,produto])
+    }
 
     return(
         <Container>
@@ -30,9 +38,11 @@ export default function Produto(){
                 <div>
                     <div>
                         <IoMenuOutline size={40} color={'#ffffff'} />
-                        <img src={logo} alt="" srcset="" />
+                        <img src={logo} alt="" srcset="" onClick={()=>navigate(-1)} />
                     </div>
-                    <IoCart size={30} color={'#ffffff'} />
+                    <Link to="/carrinho" >
+                        <IoCart size={30} color={'#ffffff'} />
+                    </Link>
                 </div>
                 <div>
                     <input type="text" placeholder="O que você está procurando?" />
@@ -84,6 +94,9 @@ export default function Produto(){
                     </div>
                 </div>
             </Content>
+            <div className='carrinho' onClick={()=>addToCart(produto)}>
+                <IoCart size={30} color={'#ffffff'} />
+            </div>
             <Footer>
                 <div className="estoque">
                     <h1>Quantidade</h1>

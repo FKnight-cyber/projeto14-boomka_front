@@ -5,12 +5,15 @@ import Timer from "../../components/Timer.js";
 import dayjs from "dayjs";
 import MonthlyProduct from "../../components/MonthlyProduct/MonthlyProduct.jsx";
 import DailyProduct from "../../components/DailyProduct/DailyProduct.jsx";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import {slider} from "../../components/slideshow.js";
 import { Container,Header,Slides,Menu,Section,Contents,Products,Title } from "./Home.js";
+import UserContext from "../../contexts/UserContext.js"
+import { Link } from "react-router-dom";
 
 export default function Home(){
     const [opened,setOpened] = useState(false);
+    const { token } = useContext(UserContext);
 
     function toggleMenu(){
         if(opened){
@@ -31,7 +34,9 @@ export default function Home(){
                     <IoSearchOutline  style={{transform:'translateX(-0.23in)'}} />
                 </div>
                 <div>
-                    <IoCart size={30} color={'#ffffff'} />
+                    <Link to="/carrinho" style={{textDecoration:'none'}}>
+                        <IoCart size={30} color={'#ffffff'} />
+                    </Link>
                     {
                         opened ? <IoClose onClick={()=>toggleMenu()} size={30} color={'#ffffff'} />
                         :

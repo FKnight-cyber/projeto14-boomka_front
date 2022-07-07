@@ -4,6 +4,19 @@ export const Container = styled.div`
     width: 100%;
     height: 100vh;
     position: relative;
+
+    .carrinho{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        bottom: 100px;
+        right: 10px;
+        border-radius: 50%;
+        background-color: #E65F0D;
+        position: fixed;
+    }
 `
 
 export const Header = styled.div`
