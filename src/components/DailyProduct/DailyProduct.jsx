@@ -8,9 +8,10 @@ export default function DailyProduct(){
     const [products,setProducts] = useState([]);
 
     useEffect(()=>{
-        const promise = axios.get("http://localhost:5000/daily");
+        const promise = axios.get("https://boomka.herokuapp.com/daily");
 
         promise.then(res => {
+            console.log(1);
             setProducts(res.data);
         })
 
