@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
-import Home from "../pages/Home.js";
+import Home from "../pages/Home/Home.jsx";
+import Produto from "../pages/Produto/Produto.jsx";
+import Carrinho from "../pages/Carrinho.js";
 import GlobalStyle from "../theme/globalstyles.js";
 import UserContext from "../contexts/UserContext.js";
 import Login from "../pages/Login.js";
@@ -22,6 +24,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Registration />}/>
+        <Route path="/produtos/:id" element={<Produto />} />
+        <Route path="/carrinho" element={<Carrinho />} />
       </Routes>
     </UserContext.Provider >
     </BrowserRouter> 
