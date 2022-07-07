@@ -9,7 +9,7 @@ export default function MonthlyProduct(){
     const [products,setProducts] = useState([]);
 
     useEffect(()=>{
-        const promise = axios.get("http://localhost:5000/monthly");
+        const promise = axios.get("https://boomka.herokuapp.com/monthly");
 
         promise.then(res => {
             setProducts(res.data);

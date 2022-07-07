@@ -12,7 +12,7 @@ export default function Produto(){
     const {id} = useParams();
 
     useEffect(()=>{
-        const promise = axios.get(`http://localhost:5000/produtos/${id}`);
+        const promise = axios.get(`https://boomka.herokuapp.com/produtos/${id}`);
 
         promise.then(res => {
             console.log(produto)
