@@ -3,8 +3,8 @@ import { IoMenuOutline,IoCart,IoSearchOutline,
 IoTimerOutline,IoClose,IoPerson,IoPeople,IoFlash } from "react-icons/io5";
 import Timer from "../../components/Timer.js";
 import dayjs from "dayjs";
-import MonthlyProduct from "../../components/MonthlyProduct/MonthlyProduct.js";
-import DailyProduct from "../../components/DailyProduct/DailyProduct.js";
+import MonthlyProduct from "../../components/MonthlyProduct/MonthlyProduct.jsx";
+import DailyProduct from "../../components/DailyProduct/DailyProduct.jsx";
 import { useState } from "react";
 import {slider} from "../../components/slideshow.js";
 import { Container,Header,Slides,Menu,Section,Contents,Products,Title } from "./Home.js";
