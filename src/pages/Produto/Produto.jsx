@@ -22,7 +22,7 @@ export default function Produto(){
         promise.catch(Error => {
             alert(Error.response.data);
         })
-    },[])
+    },)
 
     return(
         <Container>
