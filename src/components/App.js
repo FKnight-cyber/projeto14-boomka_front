@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
-import Home from "../pages/Home.js";
-import Produto from "../pages/Produto.js";
+import Home from "../pages/Home/Home.jsx";
+import Produto from "../pages/Produto/Produto.jsx";
 import GlobalStyle from "../theme/globalstyles.js";
 import UserContext from "../contexts/UserContext.js";
 
