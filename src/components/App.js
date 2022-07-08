@@ -7,6 +7,7 @@ import GlobalStyle from "../theme/globalstyles.js";
 import UserContext from "../contexts/UserContext.js";
 import Login from "../pages/Login.js";
 import Registration from "../pages/Registration.js";
+import Pedido from "../pages/Pedido.js";
 import Account from "../pages/Account.js";
 import Pedidos from "../pages/Pedidos.js";
 import Adress from "../pages/Adress.js";
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/sign-up" element={<Registration />}/>
         <Route path="/produtos/:id" element={<Produto />} />
         <Route path="/carrinho" element={<Carrinho />} />
+        <Route path="/pedido" element={<Pedido />} />
         <Route path="/account" element={<Account />} />
         <Route path="/pedidos" element={<Pedidos />} />
         <Route path="/adress" element={<Adress />} />

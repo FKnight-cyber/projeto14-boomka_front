@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { IoMenuOutline,IoCart,IoSearchOutline,IoClose } from "react-icons/io5";
-import logo from '../assets/kbum3logo.png';
-import { useState } from "react";
-export default function Header () {
-    const [opened,setOpened] = useState(false);
+import logo from '../assets/bomb.png';
+import { Link } from "react-router-dom";
+export default function Header ({opened,setOpened}) {
 
     function toggleMenu(){
         if(opened){
@@ -16,14 +15,18 @@ export default function Header () {
         
             <Container>
                 <div>
-                    <img src={logo} alt="podemos alterar esse logo depois!" srcset="" />
+                    <Link to="/" styled={{textDecoration:'none'}}>
+                        <img src={logo} alt="podemos alterar esse logo depois!" srcset="" />
+                    </Link>
                 </div>
                 <div>
                     <input type="text" placeholder="Busca..." />
                     <IoSearchOutline  style={{transform:'translateX(-0.23in)'}} />
                 </div>
                 <div>
-                    <IoCart size={30} color={'#ffffff'} />
+                    <Link to="/carrinho" style={{textDecoration:'none'}}>
+                        <IoCart size={30} color={'#ffffff'} />
+                    </Link>
                     {
                         opened ? <IoClose onClick={()=>toggleMenu()} size={30} color={'#ffffff'} />
                         :

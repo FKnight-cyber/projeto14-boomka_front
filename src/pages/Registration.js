@@ -45,7 +45,7 @@ function Register () {
                 <input value={user.email} name='email' type="email" placeholder="email" onChange={changeInput}/>
                 <input value={user.password} name='password' type="password" placeholder="senha" onChange={changeInput}/>
                 <input value={user.checkPassword} name='checkPassword' type="password" placeholder="confirme sua senha" onChange={changeInput}/>
-                <input value={user.cpf} name='cpf' type="text" placeholder="cpf" onChange={changeInput}/>
+                <input value={user.cpf} name='cpf' pattern="/^[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}$" maxLength={11} type="text" placeholder="cpf" onChange={changeInput}/>
                 <button onClick={signUp} type={'submit'}>
                     <span>CADASTRAR</span>
                 </button>

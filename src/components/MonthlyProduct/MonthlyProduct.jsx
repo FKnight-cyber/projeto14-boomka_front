@@ -22,8 +22,8 @@ export default function MonthlyProduct(){
 
     return(
         products.map((product,index) => 
-        <Link to={`produtos/${product.id}`} style={{textDecoration:'none'}} >
-            <Container key={index}>
+        <Link key={index} to={`produtos/${product.id}`} style={{textDecoration:'none'}} >
+            <Container>
                 <div>
                     <IoHeart color={'red'} size={20} />
                 </div>
@@ -32,7 +32,7 @@ export default function MonthlyProduct(){
                     <div>
                         <h1>{product.title}</h1>
                         <h2>R$ {product.price}</h2>
-                        <h3>R$ {product.price*0.85}</h3>
+                        <h3>R$ {parseFloat(product.price*0.85).toFixed(2)}</h3>
                         <h4>À vista no PIX</h4>
                     </div>
                 </div>

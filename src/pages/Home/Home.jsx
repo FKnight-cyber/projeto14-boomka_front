@@ -1,4 +1,4 @@
-import logo from "../../assets/kbum3logo.png";
+import logo from "../../assets/bomb.png";
 import { IoMenuOutline,IoCart,IoSearchOutline,
 IoTimerOutline,IoClose,IoPerson,IoPeople,IoFlash } from "react-icons/io5";
 import Timer from "../../components/Timer.js";

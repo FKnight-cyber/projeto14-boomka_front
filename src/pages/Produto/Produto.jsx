@@ -1,14 +1,16 @@
 import axios from 'axios';
 import { IoMenuOutline,IoCart,IoSearchOutline,IoHeart,
-IoCheckmarkCircleSharp,IoSadOutline } from "react-icons/io5";
-import logo from "../../assets/kbum3logo.png";
+IoCheckmarkCircleSharp,IoSadOutline,IoPerson,IoPeople } from "react-icons/io5";
+import logo from "../../assets/bomb.png";
 import { useEffect, useState,useContext } from "react";
 import { useParams,useNavigate, Link } from 'react-router-dom';
 import { Container,Header,Footer,Content } from './Produto.js';
 import UserContext from '../../contexts/UserContext';
+import { Menu } from '../Home/Home.js';
 
 export default function Produto(){
     const [produto,setProduto] = useState('');
+    const [opened,setOpened] = useState(false);
     const navigate = useNavigate();
     const { cart,setCart } = useContext(UserContext);
 
@@ -28,16 +30,30 @@ export default function Produto(){
 
     function addToCart(produto){
         if(produto.inventory === 0) return alert('Estoque esgotado!');
-        if(cart.includes(produto)) return;
-        setCart([...cart,produto])
+        alert('adicionado ao carrinho');
+        setCart([...cart,produto]);
+    };
+
+    function toggleMenu(){
+        if(opened){
+            setOpened(false);
+        }else{
+            setOpened(true);
+        }
+    };
+
+    function comprar(){
+        if(produto.inventory === 0) return alert("Estoque esgotado!");
+        setCart([...cart,produto]);
+        navigate("/carrinho");
     }
 
     return(
-        <Container>
+        <Container visibility={opened}>
             <Header>
                 <div>
                     <div>
-                        <IoMenuOutline size={40} color={'#ffffff'} />
+                        <IoMenuOutline onClick={()=>toggleMenu()} size={40} color={'#ffffff'} />
                         <img src={logo} alt="" srcset="" onClick={()=>navigate(-1)} />
                     </div>
                     <Link to="/carrinho" >
@@ -49,7 +65,32 @@ export default function Produto(){
                     <IoSearchOutline size={20} color={'#ffffff'} />
                 </div>
             </Header>
-            <Content changeColor={produto.inventory===0}>
+            {
+                opened ?
+                <Menu>
+                    <div>
+                        <div>
+                            <div>
+                                <IoPerson color={'#ffffff'} size={24} />
+                            </div>
+                            <h1>Olá, faça seu login!</h1>
+                        </div>
+                        <div>
+                            <IoPerson color={'#ffffff'} size={12} />
+                            <h1>Minha conta</h1>
+                        </div>
+                        <div>
+                            <IoPeople color={'#ffffff'} size={12} />
+                            <h1>Team</h1>
+                        </div>
+                    </div>
+                    <div>
+                        <button onClick={() => navigate("/sign-in")}>Login</button>
+                        <button onClick={() => navigate("/sign-up")}>Cadastro</button>
+                    </div>
+                </Menu>
+                :
+                <Content changeColor={produto.inventory===0}>
                 <h6>{produto.department}</h6>
                 <div>
                     <div className="title">
@@ -94,15 +135,17 @@ export default function Produto(){
                     </div>
                 </div>
             </Content>
+            }
             <div className='carrinho' onClick={()=>addToCart(produto)}>
                 <IoCart size={30} color={'#ffffff'} />
             </div>
+            <div className='espaço'></div>
             <Footer>
                 <div className="estoque">
                     <h1>Quantidade</h1>
                     <h2>{produto.inventory}</h2>
                 </div>
-                <div className="comprar">
+                <div className="comprar" onClick={comprar}>
                     <h1>Comprar</h1>
                 </div>
             </Footer>

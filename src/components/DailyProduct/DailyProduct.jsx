@@ -21,8 +21,8 @@ export default function DailyProduct(){
 
     return(
         products.map((product,index) =>
-        <Link to={`produtos/${product.id}`} style={{textDecoration:'none'}} >
-            <Container key={index}>
+        <Link key={index} to={`produtos/${product.id}`} style={{textDecoration:'none'}} >
+            <Container>
                 <div>
                     <IoHeart color={'red'} size={20} />
                 </div>

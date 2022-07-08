@@ -16,7 +16,6 @@ export default function Login () {
     function signIn(e) {
         e.preventDefault()
         const promise = axios.post('https://boomka.herokuapp.com/sign-in', {...userLogin});
-        console.log(userLogin)
         promise
         .then((res) => {
             setToken(res.data)
