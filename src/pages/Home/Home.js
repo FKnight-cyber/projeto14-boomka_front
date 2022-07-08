@@ -150,7 +150,6 @@ export const Contents = styled.div`
     display: flex;
     flex-direction: column;
     background-color: #FAFAFB;
-    width: 100%;
     height: calc(100vh - 260px);
     padding: 20px 16px 20px 16px;
 `
@@ -158,7 +157,6 @@ export const Contents = styled.div`
 export const Products = styled.div`
     display: flex;
     overflow-x: scroll;
-    scroll-behavior: auto;
 `
 
 export const Title = styled.div`

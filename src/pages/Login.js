@@ -7,7 +7,7 @@ import { useContext } from "react";
 import UserContext from '../contexts/UserContext.js'
 
 export default function Login () {
-    const {setUser} = useContext(UserContext)
+    const {setToken} = useContext(UserContext)
     const navigate = useNavigate()
     const [userLogin, setUserLogin] = useState({
         email: '',
@@ -15,10 +15,10 @@ export default function Login () {
     });
     function signIn(e) {
         e.preventDefault()
-        const promise = axios.post('https://back-boomka.herokuapp.com/sign-in', {...userLogin});
+        const promise = axios.post('https://boomka.herokuapp.com/sign-in', {...userLogin});
         promise
         .then((res) => {
-            setUser(res.data);
+            setToken(res.data);
             navigate('/')
         })
         .catch(() => alert('preencha os dados corretamente'))

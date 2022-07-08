@@ -7,6 +7,7 @@ import GlobalStyle from "../theme/globalstyles.js";
 import UserContext from "../contexts/UserContext.js";
 import Login from "../pages/Login.js";
 import Registration from "../pages/Registration.js";
+import Pedido from "../pages/Pedido.js";
 
 export default function App() {
   const [token,setToken] = useState();
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/sign-up" element={<Registration />}/>
         <Route path="/produtos/:id" element={<Produto />} />
         <Route path="/carrinho" element={<Carrinho />} />
+        <Route path="/pedido" element={<Pedido />} />
       </Routes>
     </UserContext.Provider >
     </BrowserRouter> 

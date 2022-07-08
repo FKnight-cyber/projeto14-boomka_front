@@ -6,7 +6,7 @@ export const Container = styled.div`
     position: relative;
 
     .carrinho{
-        display: flex;
+        display: ${props=>props.visibility ? 'none' : 'flex'};
         justify-content: center;
         align-items: center;
         width: 60px;
@@ -16,6 +16,10 @@ export const Container = styled.div`
         border-radius: 50%;
         background-color: #E65F0D;
         position: fixed;
+    }
+
+    .espaço{
+        height: 70px;
     }
 `
 
