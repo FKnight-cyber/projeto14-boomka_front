@@ -30,7 +30,23 @@ export default function Carrinho(){
 
     function cleanCart(){
         if(window.confirm("Você quer limpar o carrinho?")){
-            setCart([]);
+            if(token){
+                const promise = axios.delete(`https://boomka.herokuapp.com/carrinho`,{
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                });
+
+                promise.then(()=>{
+                    return alert('Carrinho limpo!');
+                });
+
+                promise.catch(Error => {
+                    return alert(Error.data.response);
+                })
+            }else{
+                setCart([]);
+            }
         }
     }
     return(
