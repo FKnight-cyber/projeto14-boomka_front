@@ -9,11 +9,12 @@ import { useState,useContext } from "react";
 import {slider} from "../../components/slideshow.js";
 import { Container,Header,Slides,Menu,Section,Contents,Products,Title } from "./Home.js";
 import UserContext from "../../contexts/UserContext.js"
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 export default function Home(){
     const [opened,setOpened] = useState(false);
     const { token } = useContext(UserContext);
+    const navigate = useNavigate();
 
     function toggleMenu(){
         if(opened){
@@ -64,8 +65,8 @@ export default function Home(){
                         </div>
                     </div>
                     <div>
-                        <button>Login</button>
-                        <button>Cadastro</button>
+                        <button onClick={() => navigate("/sign-in")}>Login</button>
+                        <button onClick={() => navigate("/sign-up")}>Cadastro</button>
                     </div>
                 </Menu>
                 :
