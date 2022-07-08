@@ -12,7 +12,7 @@ export default function Produto(){
     const [produto,setProduto] = useState('');
     const [opened,setOpened] = useState(false);
     const navigate = useNavigate();
-    const { cart,setCart } = useContext(UserContext);
+    const { cart,setCart,token } = useContext(UserContext);
 
     const {id} = useParams();
 
@@ -30,8 +30,30 @@ export default function Produto(){
 
     function addToCart(produto){
         if(produto.inventory === 0) return alert('Estoque esgotado!');
-        alert('adicionado ao carrinho');
-        setCart([...cart,produto]);
+        if(token){
+
+            const body = {
+                id
+            }
+
+            console.log(body)
+            const promise = axios.post("https://boomka.herokuapp.com/carrinho",body,{
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            });
+
+            promise.then(()=>{
+                return alert('adicionado ao carrinho');
+            });
+
+            promise.catch(Error => {
+                return alert(Error.data.response);
+            })
+        }else{
+            alert('adicionado ao carrinho');
+            setCart([...cart,produto]);
+        }
     };
 
     function toggleMenu(){

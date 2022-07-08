@@ -9,7 +9,6 @@ import Login from "../pages/Login.js";
 import Registration from "../pages/Registration.js";
 import Pedido from "../pages/Pedido.js";
 import Account from "../pages/Account.js";
-import Pedidos from "../pages/Pedidos.js";
 import Adress from "../pages/Adress.js";
 
 export default function App() {
