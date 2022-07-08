@@ -10,10 +10,13 @@ import Registration from "../pages/Registration.js";
 
 export default function App() {
   const [token,setToken] = useState();
+  const [cart,setCart] = useState([]);
 
   const userContext = {
     token,
-    setToken
+    setToken,
+    cart,
+    setCart
   }
 
   return (
