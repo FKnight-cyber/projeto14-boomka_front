@@ -33,7 +33,7 @@ export default function CartProduct(){
 const Container = styled.div`
     display: flex;
     width: 380px;
-    min-height: 170px;
+    min-height: 190px;
     margin-top: 20px;
     margin-bottom: 10px;
     padding: 8px;
