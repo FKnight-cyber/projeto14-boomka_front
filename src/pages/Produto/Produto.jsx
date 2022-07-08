@@ -15,14 +15,13 @@ export default function Produto(){
         const promise = axios.get(`https://boomka.herokuapp.com/produtos/${id}`);
 
         promise.then(res => {
-            console.log(produto)
             setProduto(res.data);
         })
 
         promise.catch(Error => {
             alert(Error.response.data);
         })
-    },)
+    },[id])
 
     return(
         <Container>
