@@ -35,7 +35,6 @@ export default function App() {
         <Route path="/carrinho" element={<Carrinho />} />
         <Route path="/pedido" element={<Pedido />} />
         <Route path="/account" element={<Account />} />
-        <Route path="/pedidos" element={<Pedidos />} />
         <Route path="/adress" element={<Adress />} />
       </Routes>
     </UserContext.Provider >

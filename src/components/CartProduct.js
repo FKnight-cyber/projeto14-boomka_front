@@ -33,7 +33,7 @@ export default function CartProduct(){
 const Container = styled.div`
     display: flex;
     width: 380px;
-    min-height: 190px;
+    min-height: 170px;
     margin-top: 20px;
     margin-bottom: 10px;
     padding: 8px;
@@ -59,16 +59,18 @@ const Container = styled.div`
         h3{
             font-weight: bolder;
             margin-bottom: 4px;
+            min-height: 20px;
         }
 
         h4{
             margin-bottom: 6px;
+            min-height: 80px;
         }
 
         h5{
             color: #589A0F;
             font-weight: bolder;
-            height: 20px;
+            min-height: 20px;
         }
 
         .remover{
