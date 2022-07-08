@@ -27,6 +27,7 @@ function Register () {
     function signUp(e) {
         e.preventDefault()
         const promise = axios.post('https://boomka.herokuapp.com/sign-up', {...user});
+        console.log(user)
         promise
         .then(() => navigate('/sign-in'))
         .catch(() => alert('preencha os dados corretamente'))

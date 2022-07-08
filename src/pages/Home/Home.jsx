@@ -57,7 +57,7 @@ export default function Home(){
                         </div>
                         <div>
                             <IoPerson color={'#ffffff'} size={12} />
-                            <h1>Minha conta</h1>
+                            <h1 onClick={() => navigate("/account")}>Minha conta</h1>
                         </div>
                         <div>
                             <IoPeople color={'#ffffff'} size={12} />
