@@ -30,13 +30,13 @@ export default function Produto(){
 
     function addToCart(produto){
         if(produto.inventory === 0) return alert('Estoque esgotado!');
+        if(cart.includes(produto)) return alert('Esse produto já está no carrinho!');
         if(token){
 
             const body = {
                 id
             }
 
-            console.log(body)
             const promise = axios.post("https://boomka.herokuapp.com/carrinho",body,{
                 headers:{
                     Authorization:`Bearer ${token}`
@@ -48,7 +48,7 @@ export default function Produto(){
             });
 
             promise.catch(Error => {
-                return alert(Error.data.response);
+                return alert(Error.response.data.message);
             })
         }else{
             alert('adicionado ao carrinho');
