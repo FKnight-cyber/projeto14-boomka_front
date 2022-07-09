@@ -1,20 +1,59 @@
-import styled from "styled-components"
-import UserContext from "../contexts/UserContext.js"
-import { useContext, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import logo from "../assets/bomb.png"
-import { IoEye,IoBarcode,IoCard } from "react-icons/io5"
+import styled from "styled-components";
+import UserContext from "../contexts/UserContext.js";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/bomb.png";
+import { IoEye,IoBarcode,IoCard,IoArrowBack } from "react-icons/io5";
+import Cartao from "../components/Card/Cartao.jsx";
+import axios from "axios";
+
+export function efetuarCompra(data){
+    console.log(data)
+}
 
 export default function Pedido(){
     const navigate = useNavigate();
     const [paymentMethod,setPaymentMethod] = useState('pix');
-    const {cart} = useContext(UserContext);
+    const [loadCard,setLoadCard] = useState(false);
+    let number;
+    let name;
+    const {cart,token} = useContext(UserContext);
 
     let sum = 0;
     cart.map(product => sum+=product.price)
 
-    function efetuarCompra(){
-        console.log(sum)
+    function comprar(type){
+
+        let value = sum;
+
+        if(type==='pix'){
+            value = sum*0.85;
+        }
+
+        if(type==='boleto'){
+            value = sum*0.9;
+        }
+
+        const body = {
+            type,
+            value,
+            cart
+        }
+
+        const promise = axios.post("https://boomka.herokuapp.com/compras",body,{
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        });
+
+        promise.then(()=>{
+            alert("Compra bem sucedida!")
+            navigate('/')
+        });
+
+        promise.catch(Error=>{
+            alert(Error.response.data)
+        });
     }
 
     return(
@@ -61,7 +100,7 @@ export default function Pedido(){
             </div>
             {
                 paymentMethod === 'pix' ?
-                <div className="totalcompra metodo2" onClick={efetuarCompra}>
+                <div className="totalcompra metodo2" onClick={()=>comprar('pix')}>
                     <h1>Á vista no PIX</h1>
                     <h2>R$ {(sum*0.85).toFixed(2)}</h2>
                 </div>
@@ -70,7 +109,7 @@ export default function Pedido(){
             }
             {
                 paymentMethod === 'boleto' ?
-                <div className="totalcompra metodo2" onClick={efetuarCompra}>
+                <div className="totalcompra metodo2" onClick={()=>comprar('boleto')}>
                     <h1>Via Boleto</h1>
                     <h2>R$ {(sum*0.9).toFixed(2)}</h2>
                 </div>
@@ -79,7 +118,7 @@ export default function Pedido(){
             }
             {
                 paymentMethod === 'cartao' ?
-                <div className="totalcompra metodo2" onClick={efetuarCompra}>
+                <div className="totalcompra metodo2" onClick={()=>alert('Compras com cartão de crédito indisponíveis no momento.')}>
                     <h1>Cartão de cŕedito</h1>
                     <h2>R$ {sum}</h2>
                 </div>
@@ -89,7 +128,17 @@ export default function Pedido(){
             <div className="retornar" onClick={()=>navigate(-1)}>
                 <h1>Retornar</h1>
             </div>
-         
+            {
+                loadCard ? 
+                <>
+                    <Cartao number={number} name={name} />
+                    <div className="return" onClick={()=>setLoadCard(false)}>
+                        <IoArrowBack size={30} color={'#ffffff'} />
+                    </div> 
+                </>
+                : 
+                ""
+            }
         </Container>
     )
 }
@@ -99,8 +148,22 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #cccccc;
+    position: relative;
+
+    .return{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        background-color: green;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        bottom: 20px;
+        right: 20px;
+    }
 
     header{
         width: 100%;
