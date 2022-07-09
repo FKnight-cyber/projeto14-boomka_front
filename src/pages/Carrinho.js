@@ -1,17 +1,52 @@
 import styled from "styled-components";
 import { IoClose,IoCart,IoBag,IoTrash } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../contexts/UserContext.js";
 import CartProduct from "../components/CartProduct.js";
+import axios from "axios";
 
 export default function Carrinho(){
     const navigate = useNavigate();
-    const { cart,setCart } = useContext(UserContext);
+    const { cart,setCart,token } = useContext(UserContext);
+
+    useEffect(()=>{
+        if(token){
+            const promise = axios.get("https://boomka.herokuapp.com/carrinho",{
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            });
+
+            promise.then(res => {
+                setCart(res.data);
+            });
+
+            promise.catch(Error=>{
+                alert(Error.data.response);
+            })
+        }
+    },[cart])
 
     function cleanCart(){
         if(window.confirm("Você quer limpar o carrinho?")){
-            setCart([]);
+            if(token){
+                const promise = axios.delete(`https://boomka.herokuapp.com/carrinho`,{
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                });
+
+                promise.then(()=>{
+                    return alert('Carrinho limpo!');
+                });
+
+                promise.catch(Error => {
+                    return alert(Error.data.response);
+                })
+            }else{
+                setCart([]);
+            }
         }
     }
     return(
