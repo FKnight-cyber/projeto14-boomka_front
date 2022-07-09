@@ -18,8 +18,14 @@ export default function Endereço () {
     });
     function signUp(e) {
         e.preventDefault()
-        const promise = axios.post('https://boomka.herokuapp.com/adress', {...user, token});
-        console.log(user)
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        
+        const promise = axios.post('https://boomka.herokuapp.com/adress', {...user}, config);
+        console.log(config)
         promise
         .then(() => navigate('/account'))
         .catch(() => alert('preencha os dados corretamente'))
