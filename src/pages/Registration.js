@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Header from "../components/Header";
+import Header from "../components/Header/Header.jsx";
 import { useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";

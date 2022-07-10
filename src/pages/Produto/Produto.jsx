@@ -7,6 +7,31 @@ import { useParams,useNavigate, Link } from 'react-router-dom';
 import { Container,Header,Footer,Content } from './Produto.js';
 import UserContext from '../../contexts/UserContext';
 import { Menu } from '../Home/Home.js';
+import { toast,ToastContainer } from "react-toastify";
+
+const notify = (error)=>{
+    toast(`❗ ${error}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
+
+const notify2 = (msg)=>{
+    toast(`✅ ${msg}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
 
 export default function Produto(){
     const [produto,setProduto] = useState('');
@@ -29,8 +54,8 @@ export default function Produto(){
     },[id])
 
     function addToCart(produto){
-        if(produto.inventory === 0) return alert('Estoque esgotado!');
-        if(cart.includes(produto)) return alert('Esse produto já está no carrinho!');
+        if(produto.inventory === 0) return notify('Estoque esgotado!');
+        if(cart.includes(produto)) return notify('Esse produto já está no carrinho!');
         if(token){
 
             const body = {
@@ -44,14 +69,14 @@ export default function Produto(){
             });
 
             promise.then(()=>{
-                return alert('adicionado ao carrinho');
+                return notify2('adicionado ao carrinho');
             });
 
             promise.catch(Error => {
-                return alert(Error.response.data.message);
+                return notify(Error.response.data.message);
             })
         }else{
-            alert('adicionado ao carrinho');
+            notify2('Produto adicionado ao carrinho');
             setCart([...cart,produto]);
         }
     };
@@ -65,12 +90,13 @@ export default function Produto(){
     };
 
     function comprar(){
-        if(produto.inventory === 0) return alert("Estoque esgotado!");
+        if(produto.inventory === 0) return notify("Estoque esgotado!");
         setCart([...cart,produto]);
         navigate("/carrinho");
     }
 
     return(
+        <>
         <Container visibility={opened}>
             <Header>
                 <div>
@@ -83,6 +109,18 @@ export default function Produto(){
                     </Link>
                 </div>
             </Header>
+            <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss={false}
+            draggable={false}
+            pauseOnHover={true}
+            limit={1}
+            />
             {
                 opened ?
                 <Menu>
@@ -171,5 +209,6 @@ export default function Produto(){
                 </div>
             </Footer>
         </Container>
+        </>
     )
 }

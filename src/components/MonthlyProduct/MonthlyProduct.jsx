@@ -1,6 +1,6 @@
 import Timer from "../Timer";
 import axios from "axios";
-import { IoTimerOutline,IoHeart } from "react-icons/io5";
+import { IoTimerOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "./MonthlyProduct.js";

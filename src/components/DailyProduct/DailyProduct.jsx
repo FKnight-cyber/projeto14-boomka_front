@@ -1,6 +1,5 @@
 import Container from "./DailyProduct.js";
 import axios from "axios";
-import { IoHeart } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 

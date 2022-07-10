@@ -1,4 +1,4 @@
-import Header from "../components/Header"
+import Header from "../components/Header/Header.jsx";
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";

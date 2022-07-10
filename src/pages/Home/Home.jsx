@@ -1,19 +1,17 @@
 import logo from "../../assets/bomb.png";
-import { IoMenuOutline,IoCart,IoSearchOutline,
+import { IoMenuOutline,IoCart,
 IoTimerOutline,IoClose,IoPerson,IoPeople,IoFlash } from "react-icons/io5";
 import Timer from "../../components/Timer.js";
 import dayjs from "dayjs";
 import MonthlyProduct from "../../components/MonthlyProduct/MonthlyProduct.jsx";
 import DailyProduct from "../../components/DailyProduct/DailyProduct.jsx";
-import { useState,useContext } from "react";
+import { useState } from "react";
 import {slider} from "../../components/slideshow.js";
 import { Container,Header,Slides,Menu,Section,Contents,Products,Title } from "./Home.js";
-import UserContext from "../../contexts/UserContext.js"
 import { Link,useNavigate } from "react-router-dom";
 
 export default function Home(){
     const [opened,setOpened] = useState(false);
-    const { token } = useContext(UserContext);
     const navigate = useNavigate();
 
     function toggleMenu(){

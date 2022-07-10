@@ -1,11 +1,36 @@
-import styled from "styled-components";
-import UserContext from "../contexts/UserContext.js";
+import { Container } from "./Pedido.js";
+import UserContext from "../../contexts/UserContext.js";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/bomb.png";
+import logo from "../../assets/bomb.png";
 import { IoEye,IoBarcode,IoCard,IoArrowBack } from "react-icons/io5";
-import Cartao from "../components/Card/Cartao.jsx";
+import Cartao from "../../components/Card/Cartao.jsx";
 import axios from "axios";
+import { toast,ToastContainer } from "react-toastify";
+
+const notify = (error)=>{
+    toast(`❗ ${error}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
+
+const notify2 = (msg)=>{
+    toast(`✅ ${msg}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
 
 export function efetuarCompra(data){
     console.log(data)
@@ -15,29 +40,39 @@ export default function Pedido(){
     const navigate = useNavigate();
     const [paymentMethod,setPaymentMethod] = useState('pix');
     const [loadCard,setLoadCard] = useState(false);
-    let number;
-    let name;
+    const [pixkey,setPixkey] = useState();
     const {cart,token} = useContext(UserContext);
 
     let sum = 0;
     cart.map(product => sum+=product.price)
 
     function comprar(type){
-
         let value = sum;
+        let body = {}
 
         if(type==='pix'){
+            if(!pixkey){
+                return notify("Informe sua chave PIX!")
+            }
+
             value = sum*0.85;
+
+            body = {
+                type,
+                pixkey,
+                value,
+                cart
+            }
         }
 
         if(type==='boleto'){
             value = sum*0.9;
-        }
 
-        const body = {
-            type,
-            value,
-            cart
+            body = {
+                type,
+                value,
+                cart
+            }
         }
 
         const promise = axios.post("https://boomka.herokuapp.com/compras",body,{
@@ -47,12 +82,14 @@ export default function Pedido(){
         });
 
         promise.then(()=>{
-            alert("Compra bem sucedida!")
-            navigate('/')
+            notify2("Compra bem sucedida!")
+            setTimeout(()=>{
+                navigate('/')
+            },2000)
         });
 
         promise.catch(Error=>{
-            alert(Error.response.data)
+            notify(Error.response.data.message)
         });
     }
 
@@ -61,6 +98,18 @@ export default function Pedido(){
             <header>
                 <img src={logo} alt="" srcset="" onClick={()=>navigate(-1)} />
             </header>
+            <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss={false}
+            draggable={false}
+            pauseOnHover={true}
+            limit={1}
+            />
             <div className="content">
                 <div className="title">
                     <IoEye size={30} color={'red'} />
@@ -100,10 +149,20 @@ export default function Pedido(){
             </div>
             {
                 paymentMethod === 'pix' ?
-                <div className="totalcompra metodo2" onClick={()=>comprar('pix')}>
-                    <h1>Á vista no PIX</h1>
-                    <h2>R$ {(sum*0.85).toFixed(2)}</h2>
-                </div>
+                <>
+                    <div className="totalcompra metodo2" onClick={()=>comprar('pix')}>
+                        <h1>Á vista no PIX</h1>
+                        <h2>R$ {(sum*0.85).toFixed(2)}</h2>
+                    </div>
+                    <div className="pixkey">
+                        <h1>Chave pix</h1>
+                            <input 
+                                placeholder="Digite sua chave pix"
+                                value={pixkey}
+                                onChange={e=>setPixkey(e.target.value)}
+                            />
+                    </div>
+                </>
                 :
                 ""
             }
@@ -112,13 +171,13 @@ export default function Pedido(){
                 <div className="totalcompra metodo2" onClick={()=>comprar('boleto')}>
                     <h1>Via Boleto</h1>
                     <h2>R$ {(sum*0.9).toFixed(2)}</h2>
-                </div>
+                </div>  
                 :
                 ""
             }
             {
                 paymentMethod === 'cartao' ?
-                <div className="totalcompra metodo2" onClick={()=>alert('Compras com cartão de crédito indisponíveis no momento.')}>
+                <div className="totalcompra metodo2" onClick={()=>notify('Compras com cartão de crédito indisponíveis no momento.')}>
                     <h1>Cartão de cŕedito</h1>
                     <h2>R$ {sum}</h2>
                 </div>
@@ -131,7 +190,7 @@ export default function Pedido(){
             {
                 loadCard ? 
                 <>
-                    <Cartao number={number} name={name} />
+                    <Cartao />
                     <div className="return" onClick={()=>setLoadCard(false)}>
                         <IoArrowBack size={30} color={'#ffffff'} />
                     </div> 
@@ -142,127 +201,3 @@ export default function Pedido(){
         </Container>
     )
 }
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    min-height: 100vh;
-    background-color: #cccccc;
-    position: relative;
-
-    .return{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        background-color: green;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        bottom: 20px;
-        right: 20px;
-    }
-
-    header{
-        width: 100%;
-        height: 80px;
-        background-color: #333333;
-        padding: 10px;
-
-        img{
-            width: 50px;
-            height: 50px;
-        }
-    }
-
-    .content{
-        padding: 12px;
-        .title{
-            display: flex;
-            align-items: center;
-
-            h1{
-                margin-left: 6px;
-                font-size: 16px;
-                font-weight: bolder;
-                color: crimson;
-            }
-        }
-
-        .pixbox,.boletobox,.cardbox{
-            display: flex;
-            height: 50px;
-            width: 100%;
-            margin-top: 20px;
-            justify-content: space-between;
-            align-items: center;
-
-            h2{
-                text-align: center;
-                color: crimson;
-                margin-left: 12px;
-            }
-        }
-
-        .pix,.boleto,.card{
-            min-width: 180px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: crimson;
-            border-radius: 6px;
-
-            .pixlogo{
-                width: 30px;
-                height: 30px;
-            }
-
-            h1{
-                font-size: 16px;
-                font-weight: bolder;
-                margin-left: 6px;
-                color: #ffffff;
-            }
-        }
-    }
-
-    .totalcompra{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 90px;
-        width: 60%;
-        margin-top: 60px;
-        background-color: crimson;
-        color: #ffffff;
-        border-radius: 10px;
-        font-size: 20px;
-
-        h2{
-            font-weight: bolder;
-            margin-top: 4px;
-        }
-    }
-
-    .totalcompra.metodo2{
-        margin-top: 20px;
-    }
-
-    .retornar{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 300px;
-        height: 40px;
-        margin-top: 60px;
-        background-color: #32CD32;
-        color: #ffffff;
-        font-weight: bolder;
-        font-size: 20px;
-        border-radius: 6px;
-    }
-`

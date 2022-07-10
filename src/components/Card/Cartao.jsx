@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'react-credit-cards-2';
 import { Container } from './Cartao.js';
-import { efetuarCompra } from '../../pages/Pedido.js';
+import { efetuarCompra } from '../../pages/Pedido/Pedido.jsx';
 import "react-credit-cards-2/es/styles-compiled.css";
 
 import {
@@ -49,7 +49,6 @@ export default class Cartao extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { issuer } = this.state;
     const formData = [...e.target.elements]
       .filter(d => d.name)
       .reduce((acc, d) => {
