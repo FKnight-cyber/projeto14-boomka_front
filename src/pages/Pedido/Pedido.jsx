@@ -187,6 +187,8 @@ export default function Pedido(){
             <div className="retornar" onClick={()=>navigate(-1)}>
                 <h1>Retornar</h1>
             </div>
+            <div className="bar">
+            </div>
             {
                 loadCard ? 
                 <>

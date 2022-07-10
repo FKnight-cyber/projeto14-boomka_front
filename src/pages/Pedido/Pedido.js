@@ -27,7 +27,7 @@ export const Container = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 40%;
+        width: 70%;
         height: 70px;
         background-color: crimson;
         margin-top: 10px;
@@ -148,5 +148,10 @@ export const Container = styled.div`
         font-weight: bolder;
         font-size: 20px;
         border-radius: 6px;
+    }
+
+    .bar{
+        height: 80px;
+        background-color: #cccccc;
     }
 `

@@ -78,6 +78,7 @@ export const Footer = styled.div`
     background-color: #333333;
     position: fixed;
     font-size: 20px;
+    margin-top: 100px;
     bottom: 0;
 
     h1{
