@@ -49,7 +49,7 @@ const Container = styled.div`
                 }
 
                 h3{
-                    color: #E65F0D;
+                    color: #241571;
                     font-weight: bolder;
                 }
 
@@ -66,7 +66,7 @@ const Container = styled.div`
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid #E65F0D;
+            border: 1px solid #241571;
 
             > * {
                 &:first-child{
@@ -75,7 +75,7 @@ const Container = styled.div`
                     height: 40px;
                     justify-content: center;
                     align-items: center;
-                    background-color: #E65F0D;
+                    background-color: #241571;
                 }
             }
 
@@ -85,7 +85,7 @@ const Container = styled.div`
                     display: flex;
                     align-items: center;
                     flex-direction: column;
-                    color: #E65F0D;
+                    color: #241571;
                 }
             }
         }

@@ -1,6 +1,6 @@
 import Timer from "../Timer";
 import axios from "axios";
-import { IoTimerOutline,IoHeart } from "react-icons/io5";
+import { IoTimerOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "./MonthlyProduct.js";
@@ -25,7 +25,6 @@ export default function MonthlyProduct(){
         <Link key={index} to={`produtos/${product.id}`} style={{textDecoration:'none'}} >
             <Container>
                 <div>
-                    <IoHeart color={'red'} size={20} />
                 </div>
                 <div>
                     <img src={product.image} alt="" srcset="" />

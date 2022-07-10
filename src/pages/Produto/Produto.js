@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
 
     .carrinho{
@@ -14,8 +14,21 @@ export const Container = styled.div`
         bottom: 100px;
         right: 10px;
         border-radius: 50%;
-        background-color: #E65F0D;
+        background-color: #32CD32;
         position: fixed;
+    }
+
+    .return{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        background-color: #32CD32;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        bottom: 100px;
+        left: 20px;
     }
 
     .espaço{
@@ -25,7 +38,7 @@ export const Container = styled.div`
 
 export const Header = styled.div`
     width: 100%;
-    height: 100px;
+    height: 60px;
     background-color: #333333;
     padding: 8px;
 
@@ -65,6 +78,7 @@ export const Footer = styled.div`
     background-color: #333333;
     position: fixed;
     font-size: 20px;
+    margin-top: 100px;
     bottom: 0;
 
     h1{
@@ -134,7 +148,7 @@ padding: 10px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                width: 360px;
+                width: 340px;
                 height: 50px;
 
                 h3{
@@ -142,7 +156,7 @@ padding: 10px;
                 }
 
                 h4{
-                    color: ${props=>props.changeColor ? 'red' : '#E6600D'};
+                    color: ${props=>props.changeColor ? 'crimson' : '#32CD32'};
                     font-weight: bolder;
                 }
             }
@@ -184,7 +198,7 @@ padding: 10px;
                 }
 
                 h3{
-                    color:#E6600D;
+                    color:#32CD32;
                 }
 
                 > * {
@@ -201,7 +215,7 @@ padding: 10px;
 
                         strong{
                             font-size: 14px;
-                            color: #E6600D;
+                            color: #32CD32;
                             margin-right: 4px;
                         }
                         
@@ -210,4 +224,5 @@ padding: 10px;
             }
         }
     }
+
 `

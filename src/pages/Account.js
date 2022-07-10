@@ -1,12 +1,14 @@
-import Header from "../components/Header"
+import Header from "../components/Header/Header.jsx";
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Account () {
     const navigate = useNavigate();
+    const [opened,setOpened] = useState(false);
     return (
         <>
-            <Header />
+            <Header opened={opened} setOpened={setOpened} />
             <Container>
                 <div>
                     <h1>MINHA CONTA</h1>
@@ -25,8 +27,7 @@ export default function Account () {
     )
 }
 const Container = styled.div `
-    
-    margin-top: 10px;
+    margin-top: 70px;
     display: flex;
     flex-direction:column;
     gap:20px;

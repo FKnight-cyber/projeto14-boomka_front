@@ -1,8 +1,33 @@
-import styled from "styled-components";
 import { IoTrash } from "react-icons/io5";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../../contexts/UserContext";
 import { useContext } from "react";
 import axios from "axios";
+import { toast,ToastContainer } from "react-toastify";
+import { Container } from "./CartProduct";
+
+const notify = (error)=>{
+    toast(`❗ ${error}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
+
+const notify2 = (msg)=>{
+    toast(`✅ ${msg}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
 
 export default function CartProduct(){
     const {cart,setCart,token} = useContext(UserContext);
@@ -16,21 +41,34 @@ export default function CartProduct(){
             });
 
             promise.then(()=>{
-                return alert('removido do carrinho');
+                return notify2('Produto removido do carrinho');
             });
 
             promise.catch(Error => {
-                return alert(Error.data.response);
+                return notify(Error.response.data.message);
             })
         }else{
             const newCart = [...cart];
             newCart.splice(index,1);
             setCart([...newCart]);
+            notify2('Produto removido do carrinho');
         }
     }
     return(
         cart.map((product,index) => 
         <Container key={index}>
+            <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss={false}
+            draggable={false}
+            pauseOnHover={true}
+            limit={1}
+            />
             <div>
                 <img src={product.image} alt="" srcset="" />
             </div>
@@ -47,52 +85,3 @@ export default function CartProduct(){
     );
 }
 
-const Container = styled.div`
-    display: flex;
-    width: 380px;
-    height: 170px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding: 8px;
-    border-radius:8px;
-    background-color: #ffffff;
-    position: relative;
-    
-    img{
-        width: 80px;
-        height: 100px;
-    }
-
-    .titleproduct{
-        display: inline-block;
-        flex-direction: column;
-        word-wrap: break-word;
-        margin-top: 0;
-        margin-left: 12px;
-        padding-top: 0;
-        padding-bottom: 0;
-
-        h3{
-            font-weight: bolder;
-            margin-bottom: 4px;
-        }
-
-        h4{
-            margin-bottom: 6px;
-        }
-
-        h5{
-            color: #589A0F;
-            font-weight: bolder;
-        }
-
-        .remover{
-            display: flex;
-            justify-content: center;
-            position: absolute;
-            width: 140px;
-            right: 0;
-            bottom: 20px;
-        }
-    }
-`

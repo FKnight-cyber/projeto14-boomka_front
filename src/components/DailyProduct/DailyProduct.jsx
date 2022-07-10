@@ -1,6 +1,5 @@
 import Container from "./DailyProduct.js";
 import axios from "axios";
-import { IoHeart } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -24,7 +23,7 @@ export default function DailyProduct(){
         <Link key={index} to={`produtos/${product.id}`} style={{textDecoration:'none'}} >
             <Container>
                 <div>
-                    <IoHeart color={'red'} size={20} />
+                    
                 </div>
                 <div>
                     <img src={product.image} alt="" srcset="" />

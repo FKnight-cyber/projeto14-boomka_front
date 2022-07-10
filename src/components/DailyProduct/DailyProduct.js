@@ -49,7 +49,7 @@ const Container = styled.div`
                 }
 
                 h3{
-                    color: #E65F0D;
+                    color: #32CD32;
                     font-weight: bolder;
                 }
 
