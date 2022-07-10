@@ -151,7 +151,6 @@ export const Contents = styled.div`
     display: flex;
     flex-direction: column;
     background-color: #FAFAFB;
-    height: calc(100vh - 260px);
     padding: 20px 16px 20px 16px;
 `
 
