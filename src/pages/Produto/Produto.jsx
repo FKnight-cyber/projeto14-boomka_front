@@ -199,6 +199,8 @@ export default function Produto(){
                 <IoCart size={30} color={'#ffffff'} />
             </div>
             <div className='espaço'></div>
+            <div className='espaço'></div>
+            <div className='espaço'></div>
             <Footer>
                 <div className="estoque">
                     <h1>Quantidade</h1>
