@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IoMenuOutline,IoCart,IoSearchOutline,IoHeart,
+import { IoMenuOutline,IoCart,IoArrowBack,
 IoCheckmarkCircleSharp,IoSadOutline,IoPerson,IoPeople } from "react-icons/io5";
 import logo from "../../assets/bomb.png";
 import { useEffect, useState,useContext } from "react";
@@ -82,10 +82,6 @@ export default function Produto(){
                         <IoCart size={30} color={'#ffffff'} />
                     </Link>
                 </div>
-                <div>
-                    <input type="text" placeholder="O que você está procurando?" />
-                    <IoSearchOutline size={20} color={'#ffffff'} />
-                </div>
             </Header>
             {
                 opened ?
@@ -122,7 +118,7 @@ export default function Produto(){
                         <h2>{produto.title}</h2>
                     </div>
                     <div className="offer">
-                        <IoHeart color={'#cccccc'} size={26} />
+                        
                     </div>
                     <div className="images">
                         <img src={produto.image} alt="" srcset="" />
@@ -132,7 +128,7 @@ export default function Produto(){
                             produto.inventory === 0 ? 
                             <IoSadOutline size={30} color={'red'} />
                             : 
-                            <IoCheckmarkCircleSharp size={30} color={'#E6600D'} />
+                            <IoCheckmarkCircleSharp size={30} color={'#32CD32'} />
                         }
                         <h3>DISPONIBILIDADE</h3>
                         <div className="bar"></div>
@@ -158,6 +154,9 @@ export default function Produto(){
                 </div>
             </Content>
             }
+            <div className="return" onClick={()=>navigate(-1)}>
+                <IoArrowBack size={30} color={'#ffffff'} />
+            </div> 
             <div className='carrinho' onClick={()=>addToCart(produto)}>
                 <IoCart size={30} color={'#ffffff'} />
             </div>

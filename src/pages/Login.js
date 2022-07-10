@@ -13,6 +13,8 @@ export default function Login () {
         email: '',
         password: ''
     });
+    const [opened,setOpened] = useState(false);
+    
     function signIn(e) {
         e.preventDefault()
         const promise = axios.post('https://boomka.herokuapp.com/sign-in', {...userLogin});
@@ -28,7 +30,7 @@ export default function Login () {
     }
     return (
     <>
-            <Header />
+            <Header opened={opened} setOpened={setOpened} />
             <Container>
                 <div>
                     <div className="main">
@@ -50,12 +52,11 @@ export default function Login () {
 }
 const Container = styled.div `
     height: 100vh;
-    
     align-items: center;
-    justify-content: center;
-
     display: flex;
     flex-direction: column;
+    position: relative;
+    margin-top: 120px;
 
     > * {
         &:first-child {

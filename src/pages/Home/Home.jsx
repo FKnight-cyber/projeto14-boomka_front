@@ -31,10 +31,6 @@ export default function Home(){
                     <img src={logo} alt="podemos alterar esse logo depois!" srcset="" />
                 </div>
                 <div>
-                    <input type="text" placeholder="Busca..." />
-                    <IoSearchOutline  style={{transform:'translateX(-0.23in)'}} />
-                </div>
-                <div>
                     <Link to="/carrinho" style={{textDecoration:'none'}}>
                         <IoCart size={30} color={'#ffffff'} />
                     </Link>
@@ -84,7 +80,7 @@ export default function Home(){
                         <MonthlyProduct></MonthlyProduct>
                     </Products>
                     <Title>
-                        <IoFlash size={20} color={'#E65F0D'} />
+                        <IoFlash size={20} color={'crimson'} />
                         <h1>Acabaram de chegar!</h1>
                     </Title>
                     <Products>

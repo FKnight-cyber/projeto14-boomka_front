@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IoClose,IoCart,IoBag,IoTrash } from "react-icons/io5";
+import { IoClose,IoCart,IoBag,IoTrash,IoArrowBack } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import UserContext from "../contexts/UserContext.js";
@@ -23,7 +23,7 @@ export default function Carrinho(){
             });
 
             promise.catch(Error=>{
-                alert(Error.data.response);
+                alert(Error.response.data);
             })
         }
     },[cart])
@@ -93,6 +93,9 @@ export default function Carrinho(){
                 <IoCart size={30} color={'#ffffff'} />
                 <h2>Continuar comprando</h2>
             </div>
+            <div className="return" onClick={()=>navigate(-1)}>
+                <IoArrowBack size={30} color={'#ffffff'} />
+            </div> 
         </Container>
     )
 }
@@ -111,7 +114,7 @@ export const Container = styled.div`
         align-items: center;
         width: 100%;
         height: 60px;
-        background-color: #1960B1;
+        background-color: #333333;
         padding-left:10px;
         padding-right: 16px;
         color: #ffffff;
@@ -140,7 +143,7 @@ export const Container = styled.div`
         align-items: center;
         margin-top: 20px;
         font-size: 20px;
-        color:#E6600D;
+        color:crimson;
 
         h1{
             margin-left: 6px;
@@ -151,15 +154,20 @@ export const Container = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 240px;
+        width: 60%;
         height: 60px;
         margin-top: 10px;
         padding-left: 10px;
         padding-right: 10px;
         border-radius: 6px;
-        background-color: #E6600D;
+        background-color: crimson;
         font-size: 20px;
         color: #ffffff;
+
+        @media (min-width:600px) {
+            margin-top: 20px;
+            justify-content: center;
+        }
     }
 
     .continue.compra{
@@ -195,12 +203,25 @@ export const Container = styled.div`
             align-items: center;
             border: 1px solid red;
             border-radius: 4px;
-            width: 220px;
+            width: 60%;
             height: 30px;
 
             h1{
                 color: red;
             }
         }
+    }
+
+    .return{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        background-color: #32CD32;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        bottom: 20px;
+        left: 20px;
     }
 `

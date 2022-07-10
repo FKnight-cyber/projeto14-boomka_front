@@ -20,10 +20,6 @@ export default function Header ({opened,setOpened}) {
                     </Link>
                 </div>
                 <div>
-                    <input type="text" placeholder="Busca..." />
-                    <IoSearchOutline  style={{transform:'translateX(-0.23in)'}} />
-                </div>
-                <div>
                     <Link to="/carrinho" style={{textDecoration:'none'}}>
                         <IoCart size={30} color={'#ffffff'} />
                     </Link>
@@ -39,11 +35,14 @@ export default function Header ({opened,setOpened}) {
 }
 const Container = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 60px;
-    background-color: #1960B1;
+    background-color: #333333;
+    padding-right: 10px;
+    position: absolute;
+    top:0;
 
   > * {
     &:first-child{

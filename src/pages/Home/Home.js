@@ -6,11 +6,12 @@ export const Container = styled.div`
 
 export const Header = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 60px;
-    background-color: #1960B1;
+    background-color: #333333;
+    padding-right: 10px;
 
   > * {
     &:first-child{
@@ -53,7 +54,7 @@ export const Menu = styled.div`
     justify-content: space-between;
     width: 100%;
     height: calc(100vh - 60px);
-    background-color: #1960B1;
+    background-color: #333333;
     padding: 20px 16px 20px 16px;
 
     > * {
@@ -110,7 +111,7 @@ export const Menu = styled.div`
 
         button{
             height: 40px;
-            background-color: #EB881E;
+            background-color: crimson;
             border: none;
             border-radius: 6px;
             margin-bottom: 6px;
@@ -129,7 +130,7 @@ export const Section = styled.div`
             align-items: center;
             height: 40px;
             width: 100%;
-            background-color: #E65F0D;
+            background-color: #241571;
             color:#ffffff;
             padding-left: 20px;
             padding-right: 20px;

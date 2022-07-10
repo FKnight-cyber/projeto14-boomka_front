@@ -49,10 +49,11 @@ export default function CartProduct(){
 
 const Container = styled.div`
     display: flex;
-    width: 380px;
+    width: 90%;
     height: 170px;
     margin-top: 20px;
     margin-bottom: 10px;
+    margin-left: 20px;
     padding: 8px;
     border-radius:8px;
     background-color: #ffffff;
