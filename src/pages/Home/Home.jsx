@@ -1,19 +1,17 @@
-import logo from "../../assets/kbum3logo.png";
-import { IoMenuOutline,IoCart,IoSearchOutline,
+import logo from "../../assets/bomb.png";
+import { IoMenuOutline,IoCart,
 IoTimerOutline,IoClose,IoPerson,IoPeople,IoFlash } from "react-icons/io5";
 import Timer from "../../components/Timer.js";
 import dayjs from "dayjs";
 import MonthlyProduct from "../../components/MonthlyProduct/MonthlyProduct.jsx";
 import DailyProduct from "../../components/DailyProduct/DailyProduct.jsx";
-import { useState,useContext } from "react";
+import { useState } from "react";
 import {slider} from "../../components/slideshow.js";
 import { Container,Header,Slides,Menu,Section,Contents,Products,Title } from "./Home.js";
-import UserContext from "../../contexts/UserContext.js"
 import { Link,useNavigate } from "react-router-dom";
 
 export default function Home(){
     const [opened,setOpened] = useState(false);
-    const { token } = useContext(UserContext);
     const navigate = useNavigate();
 
     function toggleMenu(){
@@ -29,10 +27,6 @@ export default function Home(){
             <Header>
                 <div>
                     <img src={logo} alt="podemos alterar esse logo depois!" srcset="" />
-                </div>
-                <div>
-                    <input type="text" placeholder="Busca..." />
-                    <IoSearchOutline  style={{transform:'translateX(-0.23in)'}} />
                 </div>
                 <div>
                     <Link to="/carrinho" style={{textDecoration:'none'}}>
@@ -84,7 +78,7 @@ export default function Home(){
                         <MonthlyProduct></MonthlyProduct>
                     </Products>
                     <Title>
-                        <IoFlash size={20} color={'#E65F0D'} />
+                        <IoFlash size={20} color={'crimson'} />
                         <h1>Acabaram de chegar!</h1>
                     </Title>
                     <Products>

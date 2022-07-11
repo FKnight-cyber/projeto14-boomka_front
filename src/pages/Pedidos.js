@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from "react"
 import axios from 'axios'
 import UserContext from "../contexts/UserContext"
 
-export default function Pedidos () {
-    const [data, setData] = useState([])
+export default function Pedidos(){
+  const [data, setData] = useState([])
     const {token} = useContext(UserContext);
     useEffect(() => {
         const config = {
