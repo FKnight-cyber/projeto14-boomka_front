@@ -24,11 +24,10 @@ export default function Pedidos(){
                 <h1>PEDIDOS</h1>
                 <h2>Confira os seus pedidos</h2>
                 <div>
-                    {data.length > 0 ?
+                    {data.length < 0 ? <></>
+                    :
                     <>
-                    {data.map ((dat) =>
-                        <>
-                         <div className="box">
+                    <div className="box">
                         <div>
                             <h3>N do pedido</h3>
                             <h4>2988788898</h4>
@@ -37,15 +36,11 @@ export default function Pedidos(){
                             <h3>Realizado em:</h3>
                             <h4>09/07/2022</h4>
                         </div>
-                        </div>
-                        <div className="pedido">
-                            <img src={data.image} alt="" srcset="" />
-                        </div>
-                        </>
-                    )}
-                   
-                    </> : <></>
-                    }
+                    </div>
+                    <div className="pedido">
+                        <img src={data.image} alt="" srcset="" />
+                    </div>
+                    </>}
                     
                 </div>
 
