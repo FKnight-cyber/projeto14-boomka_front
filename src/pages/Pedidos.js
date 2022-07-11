@@ -5,7 +5,7 @@ import axios from 'axios'
 import UserContext from "../contexts/UserContext"
 
 export default function Pedidos(){
-  const [data, setData] = useState([])
+    const [data, setData] = useState([])
     const {token} = useContext(UserContext);
     useEffect(() => {
         const config = {
@@ -24,7 +24,7 @@ export default function Pedidos(){
                 <h1>PEDIDOS</h1>
                 <h2>Confira os seus pedidos</h2>
                 <div>
-                    {data.length < 0 ? <></>
+                    {data.length <= 0 ? <></>
                     :
                     <>
                     <div className="box">
@@ -51,6 +51,7 @@ export default function Pedidos(){
     )
 }
 const Container = styled.div `
+    margin-top: 60px;
     > div {
         border: 1px gray solid
     }
