@@ -5,13 +5,18 @@ import Timer from "../../components/Timer.js";
 import dayjs from "dayjs";
 import MonthlyProduct from "../../components/MonthlyProduct/MonthlyProduct.jsx";
 import DailyProduct from "../../components/DailyProduct/DailyProduct.jsx";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {slider} from "../../components/slideshow.js";
 import { Container,Header,Slides,Menu,Section,Contents,Products,Title } from "./Home.js";
 import { Link,useNavigate } from "react-router-dom";
+import { ReactScrolling } from 'react-auto-glide';
+import 'react-auto-glide/dist/index.css';
+import axios from "axios";
 
 export default function Home(){
     const [opened,setOpened] = useState(false);
+    const [productsMonthly,setProductsMonthly] = useState([]);
+    const [productsDaily,setProductsDaily] = useState([]);
     const navigate = useNavigate();
 
     function toggleMenu(){
@@ -22,6 +27,31 @@ export default function Home(){
         }
     }
 
+     useEffect(() => {
+        const promise = axios.get("https://boomka.herokuapp.com/monthly");
+
+        promise.then(res => {
+            setProductsMonthly(res.data);
+        })
+
+        promise.catch(Error => {
+            alert(Error.response.data)
+        })
+
+        const promise2 = axios.get("https://boomka.herokuapp.com/daily");
+
+        promise2.then(res => {
+            setProductsDaily(res.data);
+        })
+
+        promise2.catch(Error => {
+            alert(Error.response.data)
+        })
+    },[])
+   
+    const mapper = ({price,id,image,title}) => <MonthlyProduct price={price} id={id} image={image} title={title} />;
+    const mapperDaily = ({price,id,image,title}) => <DailyProduct price={price} id={id} image={image} title={title} />;
+    
     return(
         <Container>
             <Header>
@@ -75,14 +105,14 @@ export default function Home(){
                 </div>
                 <Contents>
                     <Products>
-                        <MonthlyProduct></MonthlyProduct>
+                        {productsMonthly.length ? <ReactScrolling time={'10s'} width={'320px'} mapper={mapper} list={productsMonthly} /> : ''}
                     </Products>
                     <Title>
                         <IoFlash size={20} color={'crimson'} />
                         <h1>Acabaram de chegar!</h1>
                     </Title>
                     <Products>
-                        <DailyProduct></DailyProduct>
+                        {productsDaily.length ? <ReactScrolling time={'10s'} width={'320px'} mapper={mapperDaily} list={productsDaily} /> : ''}
                     </Products>
                 </Contents>
             </Section>

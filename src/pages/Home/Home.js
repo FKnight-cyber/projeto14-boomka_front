@@ -157,6 +157,8 @@ export const Contents = styled.div`
 export const Products = styled.div`
     display: flex;
     overflow-x: scroll;
+    width: 100%;
+    height: 200px;
 `
 
 export const Title = styled.div`

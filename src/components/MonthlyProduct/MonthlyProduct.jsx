@@ -1,37 +1,23 @@
 import Timer from "../Timer";
 import axios from "axios";
 import { IoTimerOutline } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useEffect,useContext } from "react";
 import { Link } from "react-router-dom";
 import Container from "./MonthlyProduct.js";
+import UserContext from "../../contexts/UserContext";
 
-export default function MonthlyProduct(){
-    const [products,setProducts] = useState([]);
-
-    useEffect(()=>{
-        const promise = axios.get("https://boomka.herokuapp.com/monthly");
-
-        promise.then(res => {
-            setProducts(res.data);
-        })
-
-        promise.catch(Error => {
-            alert(Error.response.data)
-        })
-    },[])
-
+export default function MonthlyProduct({id,image,title,price}){
     return(
-        products.map((product,index) => 
-        <Link key={index} to={`produtos/${product.id}`} style={{textDecoration:'none'}} >
+        <Link to={`produtos/${id}`} style={{textDecoration:'none'}} >
             <Container>
                 <div>
                 </div>
                 <div>
-                    <img src={product.image} alt="" srcset="" />
+                    <img src={image} alt="" srcset="" />
                     <div>
-                        <h1>{product.title}</h1>
-                        <h2>R$ {product.price}</h2>
-                        <h3>R$ {parseFloat(product.price*0.85).toFixed(2)}</h3>
+                        <h1>{title}</h1>
+                        <h2>R$ {price}</h2>
+                        <h3>R$ {parseFloat(price*0.85).toFixed(2)}</h3>
                         <h4>À vista no PIX</h4>
                     </div>
                 </div>
@@ -44,6 +30,5 @@ export default function MonthlyProduct(){
                 </div>
             </Container>
         </Link>
-        )
     );
 }

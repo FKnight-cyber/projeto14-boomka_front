@@ -15,11 +15,15 @@ import Adress from "../pages/Adress.js";
 export default function App() {
   const [token,setToken] = useState('');
   const [cart,setCart] = useState([]);
+  const [products,setProducts] = useState([{}]);
+  
   const userContext = {
     token,
     setToken,
     cart,
-    setCart
+    setCart,
+    products,
+    setProducts
   }
 
   return (

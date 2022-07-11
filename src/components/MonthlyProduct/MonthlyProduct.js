@@ -36,7 +36,7 @@ const Container = styled.div`
                     overflow:hidden;
                     white-space:nowrap;
                     min-width: 100px;
-                    max-width: calc(26%);
+                    max-width: 170px;
                     text-overflow: ellipsis;
                     margin-bottom: 8px;
                     font-weight: bolder;
