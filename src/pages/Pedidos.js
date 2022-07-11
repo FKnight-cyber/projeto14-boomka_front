@@ -1,7 +1,22 @@
 import Header from "../components/Header"
 import styled from "styled-components"
+import { useContext, useEffect, useState } from "react"
+import axios from 'axios'
+import UserContext from "../contexts/UserContext"
 
 export default function Pedidos () {
+    const [data, setData] = useState([])
+    const {token} = useContext(UserContext);
+    useEffect(() => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        const promise = axios.get('https://boomka.herokuapp.com/myproducts', config);
+        promise.then((res) => setData(res.data))
+    }, [])
+    console.log(data)
     return (
         <>
             <Header />
