@@ -5,7 +5,7 @@ import axios from 'axios'
 import UserContext from "../contexts/UserContext"
 
 export default function Pedidos () {
-    const data = []
+    const [data, setData] = useState([])
     const {token} = useContext(UserContext);
     useEffect(() => {
         const config = {
@@ -14,6 +14,7 @@ export default function Pedidos () {
             }
         }
         const promise = axios.get('https://boomka.herokuapp.com/myproducts', config);
+        promise.then((res) => setData(res.data))
     }, [])
     console.log(data)
     return (
@@ -23,10 +24,11 @@ export default function Pedidos () {
                 <h1>PEDIDOS</h1>
                 <h2>Confira os seus pedidos</h2>
                 <div>
-                    {data === [] ? <h1>Sem produtos registrados</h1>
-                    :
+                    {data.length > 0 ?
                     <>
-                    <div className="box">
+                    {data.map ((dat) =>
+                        <>
+                         <div className="box">
                         <div>
                             <h3>N do pedido</h3>
                             <h4>2988788898</h4>
@@ -35,11 +37,15 @@ export default function Pedidos () {
                             <h3>Realizado em:</h3>
                             <h4>09/07/2022</h4>
                         </div>
-                    </div>
-                    <div className="pedido">
-                        <img src={data.image} alt="" srcset="" />
-                    </div>
-                    </>}
+                        </div>
+                        <div className="pedido">
+                            <img src={data.image} alt="" srcset="" />
+                        </div>
+                        </>
+                    )}
+                   
+                    </> : <></>
+                    }
                     
                 </div>
 
