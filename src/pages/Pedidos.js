@@ -16,7 +16,6 @@ export default function Pedidos(){
         const promise = axios.get('https://boomka.herokuapp.com/myproducts', config);
         promise.then((res) => setData(res.data))
     }, [])
-    console.log(data[2].compras[0].department)
     return (
         <>
             <Header />
