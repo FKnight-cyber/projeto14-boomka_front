@@ -1,4 +1,4 @@
-import Header from "../components/Header"
+import Header from "../components/Header/Header.jsx";
 import styled from "styled-components"
 import { useContext, useEffect, useState } from "react"
 import axios from 'axios'
