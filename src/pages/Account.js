@@ -1,11 +1,33 @@
 import Header from "../components/Header/Header.jsx";
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import UserContext from "../contexts/UserContext.js";
+import axios from "axios";
 
 export default function Account () {
     const navigate = useNavigate();
+    const [click, setClick] = useState(false);
+    function Adress() {
+        if(!click) {
+            setClick(true)
+        } else {
+            setClick(false)
+        }
+    }
     const [opened,setOpened] = useState(false);
+    const [data, setData] = useState([])
+    const {token} = useContext(UserContext)
+    useEffect(() => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        const promise = axios.get('https://boomka.herokuapp.com/adress', config);
+        promise.then((res) => setData(res.data))
+    }, [])
+    console.log(data)
     return (
         <>
             <Header opened={opened} setOpened={setOpened} />
@@ -20,8 +42,12 @@ export default function Account () {
                 </div>
                 <div>
                     <h1>ENDEREÇO</h1>
-                    <h2 onClick={() => navigate('/adress')}>Cadastrar endereço de entrega</h2>
+                    <h2 onClick={() => navigate('/adress')}>Cadastrar endereço de entrega</h2> 
+                    <h2 onClick={() => Adress()}>Meu endereço</h2>
+                    {click ? <><h2># {data.cidade} - {data.bairro}</h2>
+                    </> : <></> }
                 </div>
+                
             </Container>
         </>
     )
@@ -32,6 +58,7 @@ const Container = styled.div `
     flex-direction:column;
     gap:20px;
     padding: 0 10px;
+    
     div {
         display: flex;
         flex-direction:column;

@@ -5,7 +5,7 @@ import axios from 'axios'
 import UserContext from "../contexts/UserContext"
 
 export default function Pedidos(){
-  const [data, setData] = useState([])
+    const [data, setData] = useState([])
     const {token} = useContext(UserContext);
     useEffect(() => {
         const config = {
@@ -26,28 +26,22 @@ export default function Pedidos(){
                 <h1>PEDIDOS</h1>
                 <h2>Confira os seus pedidos</h2>
                 <div>
-                    {data.length > 0 ?
+                    {data.length <= 0 ? <></>
+                    :
                     <>
-                    {data.map ((dat) =>
-                        <>
-                         <div className="box">
+                    {data.map((dat) => <div className="pedidos">
+                    <div className="box">
                         <div>
-                            <h3>N do pedido</h3>
-                            <h4>2988788898</h4>
+                            <h3>{dat.compras[0].department}</h3>
+                            
                         </div>
-                        <div>
-                            <h3>Realizado em:</h3>
-                            <h4>09/07/2022</h4>
-                        </div>
-                        </div>
-                        <div className="pedido">
-                            <img src={data.image} alt="" srcset="" />
-                        </div>
-                        </>
-                    )}
-                   
-                    </> : <></>
-                    }
+                       
+                    </div>
+                    <div className="pedido">
+                        <img src={dat.compras[0].image} alt="" srcset="" />
+                    </div>
+                    </div>)}
+                    </>}
                     
                 </div>
 
@@ -58,13 +52,17 @@ export default function Pedidos(){
     )
 }
 const Container = styled.div `
+    margin-top: 60px;
     > div {
-        border: 1px gray solid
+        border: 1px gray solid;
+        display: flex;
+        flex-direction: column;
     }
     padding: 10px;
     display:flex;
     flex-direction:column;
     gap: 5px;
+    
     h1 {
         color: orange;
         font-weight: 700;
