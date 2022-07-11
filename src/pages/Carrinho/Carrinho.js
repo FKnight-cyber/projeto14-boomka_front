@@ -62,7 +62,7 @@ export const Container = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 60%;
+        width: 66%;
         height: 60px;
         margin-top: 10px;
         padding-left: 10px;

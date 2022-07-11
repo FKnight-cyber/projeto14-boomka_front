@@ -101,7 +101,7 @@ export default function Produto(){
             <Header>
                 <div>
                     <div>
-                        <IoMenuOutline onClick={()=>toggleMenu()} size={40} color={'#ffffff'} />
+                        <IoMenuOutline size={40} color={'#ffffff'} />
                         <img src={logo} alt="" srcset="" onClick={()=>navigate(-1)} />
                     </div>
                     <Link to="/carrinho" >

@@ -15,8 +15,7 @@ import axios from "axios";
 
 export default function Home(){
     const [opened,setOpened] = useState(false);
-    const [productsMonthly,setProductsMonthly] = useState([]);
-    const [productsDaily,setProductsDaily] = useState([]);
+    const [products,setProducts] = useState([]);
     const navigate = useNavigate();
 
     function toggleMenu(){
@@ -31,26 +30,15 @@ export default function Home(){
         const promise = axios.get("https://boomka.herokuapp.com/monthly");
 
         promise.then(res => {
-            setProductsMonthly(res.data);
+            setProducts(res.data);
         })
 
         promise.catch(Error => {
             alert(Error.response.data)
         })
-
-        const promise2 = axios.get("https://boomka.herokuapp.com/daily");
-
-        promise2.then(res => {
-            setProductsDaily(res.data);
-        })
-
-        promise2.catch(Error => {
-            alert(Error.response.data)
-        })
     },[])
    
     const mapper = ({price,id,image,title}) => <MonthlyProduct price={price} id={id} image={image} title={title} />;
-    const mapperDaily = ({price,id,image,title}) => <DailyProduct price={price} id={id} image={image} title={title} />;
     
     return(
         <Container>
@@ -105,14 +93,14 @@ export default function Home(){
                 </div>
                 <Contents>
                     <Products>
-                        {productsMonthly.length ? <ReactScrolling time={'10s'} width={'320px'} mapper={mapper} list={productsMonthly} /> : ''}
+                        {products.length ? <ReactScrolling time={'10s'} width={'320px'} mapper={mapper} list={products} /> : ''}
                     </Products>
                     <Title>
                         <IoFlash size={20} color={'crimson'} />
                         <h1>Acabaram de chegar!</h1>
                     </Title>
                     <Products>
-                        {productsDaily.length ? <ReactScrolling time={'10s'} width={'320px'} mapper={mapperDaily} list={productsDaily} /> : ''}
+                        <DailyProduct></DailyProduct>
                     </Products>
                 </Contents>
             </Section>
