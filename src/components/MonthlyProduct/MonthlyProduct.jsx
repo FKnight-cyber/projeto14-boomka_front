@@ -1,10 +1,7 @@
 import Timer from "../Timer";
-import axios from "axios";
 import { IoTimerOutline } from "react-icons/io5";
-import { useEffect,useContext } from "react";
 import { Link } from "react-router-dom";
 import Container from "./MonthlyProduct.js";
-import UserContext from "../../contexts/UserContext";
 
 export default function MonthlyProduct({id,image,title,price}){
     return(
