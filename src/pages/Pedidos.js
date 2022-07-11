@@ -16,7 +16,7 @@ export default function Pedidos(){
         const promise = axios.get('https://boomka.herokuapp.com/myproducts', config);
         promise.then((res) => setData(res.data))
     }, [])
-    console.log(data)
+    console.log(data[2].compras[0].department)
     return (
         <>
             <Header />
@@ -27,19 +27,18 @@ export default function Pedidos(){
                     {data.length <= 0 ? <></>
                     :
                     <>
+                    {data.map((dat) => <div className="pedidos">
                     <div className="box">
                         <div>
-                            <h3>N do pedido</h3>
-                            <h4>2988788898</h4>
+                            <h3>{dat.compras[0].department}</h3>
+                            
                         </div>
-                        <div>
-                            <h3>Realizado em:</h3>
-                            <h4>09/07/2022</h4>
-                        </div>
+                       
                     </div>
                     <div className="pedido">
-                        <img src={data.image} alt="" srcset="" />
+                        <img src={dat.compras[0].image} alt="" srcset="" />
                     </div>
+                    </div>)}
                     </>}
                     
                 </div>
@@ -53,12 +52,15 @@ export default function Pedidos(){
 const Container = styled.div `
     margin-top: 60px;
     > div {
-        border: 1px gray solid
+        border: 1px gray solid;
+        display: flex;
+        flex-direction: column;
     }
     padding: 10px;
     display:flex;
     flex-direction:column;
     gap: 5px;
+    
     h1 {
         color: orange;
         font-weight: 700;
